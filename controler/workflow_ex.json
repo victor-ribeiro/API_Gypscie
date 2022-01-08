@@ -1,0 +1,33 @@
+[
+    {
+        "DBTask":{
+            "name":"iris_select",
+            "query": "[implement] select to processe"
+        }
+    },
+    {
+        "MLTask":{
+            "name":"iris_scaler",
+            "kind":"preprocessing",
+            "operator":"StandardScaler",
+            "params":{
+                "with_mean": true,
+                "with_std": true
+            },
+            "previous":"data_select"
+        }
+    },
+    {
+        "MLTask":{
+            "name":"iris_pca",
+            "kind":"decomposition",
+            "operator":"PCA",
+            "params":{
+                "n_components": 2
+            },
+            "random_state":23,
+            "previous":"iris_scaler"
+        }
+
+    }
+]

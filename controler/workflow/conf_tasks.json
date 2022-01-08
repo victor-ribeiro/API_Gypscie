@@ -1,0 +1,14 @@
+{
+    "valid":[
+        "DBTastk",
+        "MLTask",
+        "GraphTask",
+        "TSTask"
+    ],
+    "map_app":{
+        "DBTastk": "db_api",
+        "MLTask": "gypscie_core_api",
+        "GraphTask": "graph_api",
+        "TSTask": "time_series_api"
+    }
+}

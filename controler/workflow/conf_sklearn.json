@@ -3,6 +3,26 @@
         "CalibratedClassifierCV", 
         "calibration_curve"
     ],
+    "preprocessing":[
+        "Binarizer",
+        "FunctionTransformer",
+        "KBinsDiscretizer",
+        "KernelCenterer",
+        "LabelBinarizer",
+        "LabelEncoder",
+        "MultiLabelBinarizer",
+        "MaxAbsScaler",
+        "MinMaxScaler",
+        "Normalizer",
+        "OneHotEncoder",
+        "OrdinalEncoder",
+        "PolynomialFeatures",
+        "PowerTransformer",
+        "QuantileTransformer",
+        "RobustScaler",
+        "SplineTransformer",
+        "StandardScaler"
+    ],
     "cluster":[
         "AffinityPropagation",
         "AgglomerativeClustering",
