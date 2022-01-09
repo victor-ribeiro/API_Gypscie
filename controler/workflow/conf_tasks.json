@@ -7,7 +7,10 @@
     ],
     "map_app":{
         "DBTastk": "db_api",
-        "MLTask": "gypscie_core_api",
+        "MLTask": {
+            "name":"gypscie_core_api",
+            "conf_file":"conf_sklearn.json"
+        },
         "GraphTask": "graph_api",
         "TSTask": "time_series_api"
     }
