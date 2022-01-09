@@ -1,8 +1,5 @@
 import sys
-from abc import ABC, abstractclassmethod, abstractmethod
-import os
-root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath("__file__"))))
-sys.path.append(root)
+from abc import ABC, abstractmethod
 
 from file_parser.file_parser import JSONParser
 from task_model import Task, MLTask
@@ -40,22 +37,49 @@ class TaskList(list):
         super().__init__()
         for task in tasks:
             self.append(task)
-    def run_all(self):
+    def run_all(self, data):
+        tmp_data = data
         for task in self:
-            task.run()
+            tmp_data = task.run(tmp_data)
+            yield tmp_data
     
-if __name__ == '__main__':
-    t = {
-        "MLTask":{
-            "name":"iris_scaler",
-            "kind":"preprocessing",
-            "operator":"StandardScaler",
-            "params":{
-                "with_mean": True,
-                "with_std": True
-            },
-            "previous":"data_select"
-        }
-    }
-    ml_task = MLTaskParser(task_dict=t)
-    print(ml_task.get_task())
+# if __name__ == '__main__':
+#     import numpy as np
+#     from threading import Thread
+#     def run():
+#         data = np.random.normal(0, 1, [1000, 15])
+#         t1 = {
+#             "MLTask":{
+#                 "name":"iris_scaler",
+#                 "kind":"preprocessing",
+#                 "operator":"StandardScaler",
+#                 "params":{
+#                     "with_mean": True,
+#                     "with_std": True
+#                 },
+#                 "previous":"data_select"
+#             }
+#         }
+#         t2 = {
+#             "MLTask":{
+#                 "name":"iris_pca",
+#                 "kind":"decomposition",
+#                 "operator":"PCA",
+#                 "params":{
+#                     "n_components": 2
+#                 },
+#                 "random_state":23,
+#                 "previous":"iris_scaler"
+#             }
+
+#         }
+#         scaler = MLTaskParser(task_dict=t1).get_task()
+#         pca = MLTaskParser(task_dict=t2).get_task()
+#         task_list = TaskList(scaler, pca)
+        
+#         for i in task_list.run_all(data):
+#             print(i)
+            
+#     for i in range(10):
+#         t = Thread(target=run)
+#         t.start()
