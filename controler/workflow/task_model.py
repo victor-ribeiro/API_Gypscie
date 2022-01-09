@@ -1,14 +1,21 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
 
+import sys
+
+root = '/home/victor/Documentos/doutorado/disciplinas/1_periodo/arquitetura/trabalho_2/API_Gypscie/'
+sys.path.append(root)
+
 from utils import Status
 
 class Task(ABC):
     _id = None
-    def __init__(self, name:str) -> None:
+    def __init__(self, name:str, **kwargs) -> None:
         self.name = name
         self.time_scheduled = datetime.now()
         self.status = Status.WAITING
+        for k, v in kwargs.items():
+            self.__setattr__(k, v)
     def __str__(self):
         return self._id
     @abstractmethod
@@ -26,4 +33,4 @@ class MLTask(Task):
     
 class DBTask(Task):
     def __init__(self, name: str) -> None:
-        super().__init__(name)
+        pass
