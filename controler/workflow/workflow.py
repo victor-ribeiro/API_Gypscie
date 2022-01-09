@@ -1,11 +1,20 @@
 import sys
 from abc import ABC, abstractclassmethod, abstractmethod
-
-root = '/home/victor/Documentos/doutorado/disciplinas/1_periodo/arquitetura/trabalho_2/API_Gypscie/'
+import os
+root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath("__file__"))))
 sys.path.append(root)
 
 from file_parser.file_parser import JSONParser
 from task_model import Task, MLTask
+
+class TaskValidator(JSONParser):
+    def __init__(self):
+        super().__init__()
+        self.conf_tasks = self.read_json('conf_tasks.json')
+    def validate_task(self, dict_task:dict) -> bool:
+        # validação do supertipo de operação
+        task_op = [*dict_task.keys()][0] # DBTastk, MLTask, GraphTask ou TSTask
+        return task_op in self.conf_tasks['valid']
 
 class TaskParser(ABC):
     def __init__(self, task_dict:dict) -> None:
@@ -17,15 +26,6 @@ class TaskParser(ABC):
     @abstractmethod
     def get_task(self) -> Task:
         pass
-
-class TaskValidator(JSONParser):
-    def __init__(self):
-        super().__init__()
-        self.conf_tasks = self.read_json('conf_tasks.json')
-    def validate_task(self, dict_task:dict) -> bool:
-        # validação do supertipo de poração
-        task_op = [*dict_task.keys()][0] # DBTastk, MLTask, GraphTask ou TSTask
-        return task_op in self.conf_tasks['valid']
 
 class MLTaskParser(TaskParser):
     def __init__(self, task_dict:dict) -> None:
@@ -43,3 +43,19 @@ class TaskList(list):
     def run_all(self):
         for task in self:
             task.run()
+    
+if __name__ == '__main__':
+    t = {
+        "MLTask":{
+            "name":"iris_scaler",
+            "kind":"preprocessing",
+            "operator":"StandardScaler",
+            "params":{
+                "with_mean": True,
+                "with_std": True
+            },
+            "previous":"data_select"
+        }
+    }
+    ml_task = MLTaskParser(task_dict=t)
+    print(ml_task.get_task())

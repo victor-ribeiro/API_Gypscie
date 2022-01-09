@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
-
 import sys
+import os
+root = os.path.dirname(os.path.dirname(os.path.abspath("__file__")))
 
-root = '/home/victor/Documentos/doutorado/disciplinas/1_periodo/arquitetura/trabalho_2/API_Gypscie/'
 sys.path.append(root)
 
 from utils.utils import Status
@@ -12,8 +12,6 @@ class Task(ABC):
     def __init__(self) -> None:
         self.time_scheduled = datetime.now()
         self.status = Status.WAITING
-    def __str__(self):
-        return self._id
     @abstractmethod
     def run(self) -> None:
         pass
