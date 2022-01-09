@@ -6,7 +6,7 @@ class Operator:
     """
     def get_module(self, import_from:str, import_class:str = None) -> Any:
         """Args:
-                import_from (str): caminho relativo de importação 
+                import_from (str): caminho absoluto de importação 
                 get_module('numpy') equivalente a :
                 - import numpy
                 import_class (str, optional): classe, ou função a ser importada. Defaults to None.

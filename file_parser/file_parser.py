@@ -7,7 +7,7 @@ import sys
 root = '/home/victor/Documentos/doutorado/disciplinas/1_periodo/arquitetura/trabalho_2/API_Gypscie/'
 sys.path.append(root)
 
-from utils import generate_name
+from utils.utils import generate_name
 
 class FileParser:
     def read_file(self, file_path:str) -> str:

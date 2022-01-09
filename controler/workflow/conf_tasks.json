@@ -1,6 +1,6 @@
 {
     "valid":[
-        "DBTastk",
+        "DBTask",
         "MLTask",
         "GraphTask",
         "TSTask"
