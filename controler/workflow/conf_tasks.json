@@ -6,12 +6,18 @@
         "TSTask"
     ],
     "map_app":{
-        "DBTastk": "db_api",
+        "DBTastk": {
+            "name":"db_api"
+        },
         "MLTask": {
             "name":"gypscie_core_api",
             "conf_file":"conf_sklearn.json"
         },
-        "GraphTask": "graph_api",
-        "TSTask": "time_series_api"
+        "GraphTask": {
+            "name":"graph_api"
+        },
+        "TSTask": {
+            "name":"time_series_api"
+        }
     }
 }
