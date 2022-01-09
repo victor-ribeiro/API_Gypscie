@@ -1,0 +1,7 @@
+#/bin/bash
+
+for i in $(sudo docker ps -a -q);
+    do sudo docker rm -f $i;
+    done
+sudo docker build -t gypscie_core_api:latest Gypscie_Core
+sudo docker-compose -f docker-compose.yaml up

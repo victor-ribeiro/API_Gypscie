@@ -1,9 +1,18 @@
 from enum import Enum, unique
 import random
 from datetime import datetime
+import json
 
-def generate_name(format:str=None)->str:
-    """Gera um nome aleatório para o arquivo.
+@unique
+class Status(Enum):
+    WAITING = 1
+    RUNNING = 2
+    FAIL = 3
+    SUCCESS = 4
+    
+def generate_name(format:str=None) -> str:
+    """
+    Gera um nome aleatório para o arquivo.
 
     Args:
         format (str): extensão do arquivo. Não deve conter o '.' para a extensão
@@ -18,11 +27,3 @@ def generate_name(format:str=None)->str:
     now = now.replace(" ", "_")
     name = f'{now}_{hash(val)}.{format}' if format else f'{now}_{hash(val)}'
     return name
-
-
-@unique
-class Status(Enum):
-    WAITING = 1
-    RUNNING = 2
-    FAIL = 3
-    SUCCESS = 4
