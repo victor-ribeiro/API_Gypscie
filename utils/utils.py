@@ -1,7 +1,7 @@
 from enum import Enum, unique
 import random
 from datetime import datetime
-import json
+
 
 @unique
 class Status(Enum):

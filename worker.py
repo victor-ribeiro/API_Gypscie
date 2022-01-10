@@ -1,3 +1,5 @@
+from Controler.workflow.workflow import TaskList, MLTaskParser
+import time
 from typing import Any
 
 class MLWorker:
@@ -20,4 +22,12 @@ class MLWorker:
         if import_class:
             mod = getattr(mod, import_class)
         return mod
-    
+
+def get_task_list(task_list:list) -> TaskList:
+    tmp_task_list = list()
+    for task in task_list:
+        if 'MLTask' in task:
+            tmp_task = MLTaskParser(task_dict=task).get_task()
+            tmp_task_list.append(tmp_task)
+        time.sleep(5)
+    return TaskList(*tmp_task_list) 

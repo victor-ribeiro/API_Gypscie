@@ -4,7 +4,7 @@ from typing import List
 
 import sys
 
-root = '/home/victor/Documentos/doutorado/disciplinas/1_periodo/arquitetura/trabalho_2/API_Gypscie/'
+root = os.path.dirname(os.path.dirname(os.path.abspath('__file__')))
 sys.path.append(root)
 
 from utils.utils import generate_name

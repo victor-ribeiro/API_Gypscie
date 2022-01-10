@@ -4,7 +4,11 @@ from pickle import dumps
 from pydantic import BaseModel
 from redis import Redis
 from rq import Queue, Worker
+import os
+import sys
 
+root = os.path.dirname(os.path.dirname(os.path.abspath("__file__")))
+sys.path.append(root)
 import zlib
 
 from worker import MLWorker
@@ -30,7 +34,7 @@ async def addMLTask(ml_task:MLTask) -> dict:
     result = job.result(**ml_task.params) if ml_task.params else job.result()
     result = dumps(result)
     result = zlib.compress(result, zlib.Z_BEST_COMPRESSION)
-    return{
+    return {
         'result': str(result, 'latin-1'),
         'import_from' : ml_task.kind, 
         'import_class': ml_task.operator
