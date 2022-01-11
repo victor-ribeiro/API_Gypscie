@@ -16,22 +16,20 @@ app = FastAPI()
 
 @app.post('/', status_code=201)
 async def addWF(wf_request:List[dict]) -> dict:
-    def func(t, params):
-        job = q.enqueue(t, *params)
-        w = Worker(q, connection=redis_con,)
-        w.work(burst=True )
-        return list(job.result)
-    
     import numpy as np
-    data = np.random.normal(0, 1, [2, 10])
-    task_list = func(get_task_list, [wf_request])
+    data = np.random.normal(0, 1, [200, 10])
+    job = q.enqueue(get_task_list, [wf_request])
+    w = Worker(q, connection=redis_con,)
+    w.work(burst=True )
+    task_list = job.result
+    
     tmp = data.copy()
     tasK_response = []
+    print(":::::::::::> RODEI AS TAREFAS", len(task_list), task_list)
     for t in task_list:
-        tmp = func(t.run, tmp)
+        tmp = await t.run(tmp)
         tasK_response.append(tmp)
     response = dict()
-    print(len(task_list), len(tasK_response))
     for task, _r in zip(task_list, tasK_response):
         response[task.name] = _r
     print(":::::::::::> RODEI AS TAREFAS", response)
