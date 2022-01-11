@@ -41,7 +41,7 @@ class MLTask(Task):
         _obj = pickle.loads(_obj)
         return _obj
 
-    def run(self, data) -> any:
+    def run(self, data):
         operator = self.get_operator()
         return operator.fit_transform(data)
         

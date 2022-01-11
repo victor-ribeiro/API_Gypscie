@@ -25,19 +25,19 @@ class TaskParser(ABC):
         self.dict_task = task_dict
         self.task_supertype = [*self.dict_task.keys()][0]
     @abstractmethod
-    def get_task(self) -> task_model.Task:
+    def get_task(self):
         pass
 
 class MLTaskParser(TaskParser):
-    def __init__(self, task_dict:dict) -> None:
+    def __init__(self, task_dict:dict):
         super().__init__(task_dict=task_dict)
-    def get_task(self) -> task_model.Task:
+    def get_task(self):
         _params = self.dict_task[self.task_supertype]
         _params['kind'] = f"sklearn.{_params['kind']}"
         return task_model.MLTask(**self.dict_task[self.task_supertype])
     
 class TaskList(list):
-    def __init__(self, *tasks) -> None:
+    def __init__(self, *tasks):
         super().__init__()
         for task in tasks:
             self.append(task)

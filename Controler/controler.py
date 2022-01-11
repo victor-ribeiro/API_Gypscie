@@ -25,14 +25,12 @@ async def addWF(wf_request:List[dict]) -> dict:
     
     tmp = data.copy()
     tasK_response = []
-    print(":::::::::::> RODEI AS TAREFAS", len(task_list), task_list)
     for t in task_list:
-        tmp = await t.run(tmp)
+        tmp = t.run(tmp)
         tasK_response.append(tmp)
     response = dict()
     for task, _r in zip(task_list, tasK_response):
         response[task.name] = _r
-    print(":::::::::::> RODEI AS TAREFAS", response)
     return{
         'result': response
         }
