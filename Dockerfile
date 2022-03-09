@@ -18,3 +18,4 @@ RUN pip install -r requirements.txt
 
 EXPOSE 5057
 EXPOSE 6057
+EXPOSE 6379

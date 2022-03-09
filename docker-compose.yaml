@@ -2,14 +2,14 @@ version: '3'
 
 services:
   redis:
-    image: sameersbn/redis:latest
+    image: sameersbn/redis
     ports:
       - "6379:6379"
     volumes:
       - ./redis:/data
   # gypscie_core_api
   gypscie_core_api:
-    image: gypscie_core_api:latest
+    image: gypscie_core_api
     command: uvicorn apy:app --host 0.0.0.0 --port 5057
     ports:
       - "5057:5057"
@@ -18,7 +18,7 @@ services:
     links:
       - redis
   myproj_worker:
-    image: gypscie_core_api:latest
+    image: gypscie_core_api
     command: rq worker --url redis://redis:6379 my_queue
     depends_on:
       - redis
@@ -28,7 +28,7 @@ services:
   
   # controler_core_api
   controler_api:
-    image: gypscie_core_api:latest
+    image: gypscie_core_api
     command: uvicorn controler:app --host 0.0.0.0 --port 6057
     ports:
       - "6057:6057"
@@ -39,7 +39,7 @@ services:
       - redis
       - gypscie_core_api
   controler_worker:
-    image: gypscie_core_api:latest
+    image: gypscie_core_api
     command: rq worker --url redis://redis:6379 controler_queue
     depends_on:
       - gypscie_core_api 

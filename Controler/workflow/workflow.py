@@ -11,7 +11,7 @@ from . import task_model
 class TaskValidator(file_parser.JSONParser):
     def __init__(self):
         super().__init__()
-        self.conf_tasks = self.read_json('conf_tasks.json')
+        self.conf_tasks = self.read_json('Controler/workflow/conf_tasks.json')
     def validate_task(self, dict_task:dict) -> bool:
         # validação do supertipo de operação
         task_op = [*dict_task.keys()][0] # DBTastk, MLTask, GraphTask ou TSTask

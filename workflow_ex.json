@@ -2,7 +2,7 @@
     {
         "DBTask":{
             "name":"iris_select",
-            "query": "[implement] select to processe"
+            "query": "[implement] select to process"
         }
     },
     {
@@ -23,9 +23,9 @@
             "kind":"decomposition",
             "operator":"PCA",
             "params":{
-                "n_components": 2
+                "n_components": 2,
+                "random_state":23
             },
-            "random_state":23,
             "previous":"iris_scaler"
         }
 
